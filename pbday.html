@@ -1,0 +1,471 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090d20">
+<title>A little surprise ♡</title>
+
+<style>
+*{box-sizing:border-box}
+:root{
+  --bg:#090d20;
+  --pink:#ff6689;
+  --silver:#d9dcec;
+  --lav:#c9baff;
+}
+body{
+  margin:0;min-height:100vh;
+  min-height:100svh;
+  padding:18px;
+  display:flex;align-items:center;justify-content:center;
+  background:radial-gradient(ellipse at top,#282344 0%,transparent 60%),
+  linear-gradient(145deg,#090d20,#17142c,#080b19);
+  color:#f8f6ff;
+  font-family:"Trebuchet MS",Arial,sans-serif;
+  overflow-x:hidden;
+}
+body:before{
+  content:"";position:fixed;inset:0;pointer-events:none;
+  background-image:radial-gradient(#fff 1px,transparent 1px),
+  radial-gradient(#c9baff 1px,transparent 1px);
+  background-size:53px 53px,83px 83px;
+  background-position:0 0,20px 30px;opacity:.35;
+}
+#confetti{position:fixed;inset:0;width:100%;height:100%;
+pointer-events:none;z-index:5}
+.card{
+  position:relative;z-index:2;width:100%;max-width:530px;
+  padding:clamp(24px,6vw,42px);
+  text-align:center;
+  border:1px solid #ffffff2c;border-radius:27px;
+  background:#ffffff0b;backdrop-filter:blur(15px);
+  box-shadow:0 20px 70px #0005;
+  animation:appear .5s ease;
+}
+@keyframes appear{
+  from{opacity:0;transform:translateY(12px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.page{display:none}
+.page.active{display:block;animation:appear .5s ease}
+.tag{
+  color:#ffadc3;font-size:10px;letter-spacing:3px;
+  border:1px solid #ffadc355;border-radius:30px;
+  padding:8px 12px;display:inline-block;margin-bottom:23px;
+}
+.icon{font-size:65px;margin:8px 0 17px}
+h1{
+  font:normal clamp(32px,8vw,48px)/1.15 Georgia,serif;
+  background:linear-gradient(100deg,#fff,#ffb5cb,#c9baff);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  margin:0 0 15px;
+}
+h2{font:normal 28px/1.25 Georgia,serif;color:#ffc0d2;margin:0 0 17px}
+p{color:#d0cfe3;font-size:14px;line-height:1.9}
+.small{font-size:11px;color:#a7a6c2;letter-spacing:1px}
+input{
+  width:100%;max-width:300px;padding:15px;
+  border-radius:12px;border:1px solid #ffffff30;
+  background:#ffffff0b;color:white;font-size:17px;
+  text-align:center;outline:none;margin:12px auto;
+}
+input:focus{border-color:#ff91b0}
+button{
+  font:inherit;cursor:pointer;border-radius:30px;
+  padding:14px 19px;font-size:13px;font-weight:bold;
+  transition:transform .2s,filter .2s;
+}
+button:hover{transform:translateY(-2px);filter:brightness(1.1)}
+button:focus-visible{outline:2px solid white;outline-offset:3px}
+.primary{
+  background:linear-gradient(110deg,#ff8bab,#d7c8ff);
+  color:#171127;border:0;
+}
+.secondary{
+  background:#ffffff08;color:#e3e2f4;
+  border:1px solid #ffffff35;
+}
+.buttons{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:23px}
+.buttons button{flex:1;min-width:110px}
+.error{color:#ff91ab;min-height:20px;font-size:12px}
+.gifts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:22px}
+.gift{
+  min-width:0;padding:16px 7px;border-radius:17px;
+  border:1px solid #ffffff26;background:#ffffff08;color:white;
+}
+.gift span{display:block;font-size:35px;margin-bottom:12px}
+.gift strong{font-size:12px;color:#ffc0d2}
+.gift small{display:block;color:#b8b7d0;font-size:10px;margin-top:7px}
+.letter{
+  white-space:pre-line;text-align:left;line-height:2;
+  border-left:2px solid var(--pink);padding-left:17px;
+  color:#dedced;font-size:14px;margin-top:20px;
+}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}
+.choice{
+  border:1px solid #ffffff25;border-radius:16px;
+  padding:17px 10px;background:#ffffff08;color:#eeeafa;
+  line-height:1.6;font-size:12px;
+}
+.choice span{display:block;font-size:23px;margin-bottom:8px}
+.memory-list{text-align:left;list-style:none;padding:0;margin:20px 0}
+.memory-list li{
+  padding:13px;margin:9px 0;border-radius:12px;
+  background:#ffffff08;border:1px solid #ffffff15;
+  color:#dcd9ee;font-size:13px;line-height:1.7;
+}
+.footer{font-size:10px;letter-spacing:2px;color:#9291b0;margin-top:28px}
+@media(max-width:390px){
+  body{padding:10px}
+  .card{padding:25px 17px}
+  .gifts{gap:6px}
+  .gift{padding:13px 4px}
+  .gift span{font-size:29px}
+  .gift strong{font-size:11px}
+  .choices{gap:7px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*:before,*:after{animation:none!important;scroll-behavior:auto!important}
+}
+</style>
+</head>
+<body>
+<canvas id="confetti"></canvas>
+
+<main class="card">
+  <!-- PAGE 1: PASSWORD -->
+  <section class="page active" id="p1">
+    <div class="tag">✦ PRIVATE LITTLE CORNER ✦</div>
+    <div class="icon">🔐</div>
+    <h1>Hold on...</h1>
+    <p>This little website isn't for everyone.<br>
+    Only someone special knows the secret.</p>
+    <p class="small">ENTER THE PASSWORD TO CONTINUE</p>
+    <form id="passwordForm">
+      <input id="password" type="password" inputmode="numeric"
+      placeholder="enter password ♡" autocomplete="off"
+      aria-label="Website password">
+      <div class="error" id="error" aria-live="polite"></div>
+      <button class="primary" type="submit">UNLOCK THE SURPRISE ↗</button>
+    </form>
+  </section>
+
+  <!-- PAGE 2: INTRO -->
+  <section class="page" id="p2">
+    <div class="tag">✧ YOU MADE IT ✧</div>
+    <div class="icon">🎀</div>
+    <h1>Hey, Pallavi!</h1>
+    <p>So... I made a little something for you.</p>
+    <p>It's not a million-dollar gift, unfortunately.<br>
+    but yeah something that will make ya feel special.</p>
+    <p>But it's filled with love, memories, and a tiny bit of my nonsense.</p>
+    <h2>Here's a surprise for you ♡</h2>
+    <button class="primary" onclick="go('p3');burst(100)">LET'S SEE IT ✦</button>
+  </section>
+
+  <!-- PAGE 3: EXCITEMENT -->
+  <section class="page" id="p3">
+    <div class="tag">✦ QUICK QUESTION ✦</div>
+    <div class="icon">👀</div>
+    <h1>Are you excited?</h1>
+    <p>Be honest. Your answer determines your fate.</p>
+    <div class="buttons">
+      <button class="primary" onclick="go('p4');burst(130)">YESSS!!</button>
+      <button class="secondary" onclick="go('pNo')">No.</button>
+    </div>
+  </section>
+
+  <!-- NO BRANCH -->
+  <section class="page" id="pNo">
+    <div class="tag">EXCUSE ME???</div>
+    <div class="icon">😤</div>
+    <h1>HOW DARE YOU.</h1>
+    <p>I spent my precious time making this for you and THIS is the energy I receive?</p>
+    <h2>Absolutely unacceptable.</h2>
+    <p>Go back and fix that attitude, birthday girl.</p>
+    <button class="primary" onclick="go('p3')">OKAY OKAY I'M EXCITED</button>
+  </section>
+
+  <!-- PAGE 4: GIFTS -->
+  <section class="page" id="p4">
+    <div class="tag">✧ THE GIFT ROOM ✧</div>
+    <div class="icon">🎁</div>
+    <h1>Choose a gift.</h1>
+    <p>Three little gifts, three different letters.<br>
+    Pick whichever one your heart wants first.</p>
+    <div class="gifts">
+      <button class="gift" onclick="openGift(1)">
+        <span>🎀</span><strong>GIFT ONE</strong><small>a little love</small>
+      </button>
+      <button class="gift" onclick="openGift(2)">
+        <span>💌</span><strong>GIFT TWO</strong><small>a little truth</small>
+      </button>
+      <button class="gift" onclick="openGift(3)">
+        <span>🗝️</span><strong>GIFT THREE</strong><small>a little secret</small>
+      </button>
+    </div>
+  </section>
+
+  <!-- GIFT LETTER -->
+  <section class="page" id="pGift">
+    <div class="tag">✧ SOMETHING JUST FOR YOU ✧</div>
+    <div class="icon" id="giftIcon">💌</div>
+    <h1 id="giftHeading">A little letter</h1>
+    <div class="letter" id="giftLetter"></div>
+    <div class="buttons">
+      <button class="primary" onclick="go('p5')">NEXT SURPRISE ↗</button>
+      <button class="secondary" onclick="go('p4')">BACK TO GIFTS</button>
+    </div>
+  </section>
+
+  <!-- PAGE 5: OPEN WHEN -->
+  <section class="page" id="p5">
+    <div class="tag">✧ FOR YOUR DIFFERENT DAYS ✧</div>
+    <h1>Open when...</h1>
+    <p>Save these little letters for the moments you need them.</p>
+    <div class="choices">
+      <button class="choice" onclick="openWhen(1)"><span>☁️</span>Open when you are sad</button>
+      <button class="choice" onclick="openWhen(2)"><span>🪞</span>Open when you doubt yourself</button>
+      <button class="choice" onclick="openWhen(3)"><span>🎒</span>Open when you miss our school days</button>
+      <button class="choice" onclick="openWhen(4)"><span>💌</span>Open when you miss me</button>
+    </div>
+  </section>
+
+  <!-- OPEN WHEN LETTER -->
+  <section class="page" id="pWhen">
+    <div class="tag">✧ A LETTER FOR THIS MOMENT ✧</div>
+    <div class="icon" id="whenIcon">💌</div>
+    <h1 id="whenHeading">Open when...</h1>
+    <div class="letter" id="whenLetter"></div>
+    <div class="buttons">
+      <button class="primary" onclick="go('p5')">READ ANOTHER</button>
+      <button class="secondary" onclick="go('p6')">NEXT PAGE ↗</button>
+    </div>
+  </section>
+
+  <!-- PAGE 6: THINGS THAT REMIND ME -->
+  <section class="page" id="p6">
+    <div class="tag">✧ LITTLE THINGS ✧</div>
+    <div class="icon">🪽</div>
+    <h1>Things that remind me of you.</h1>
+    <p>Some people become part of your everyday life in the smallest ways.</p>
+    <ul class="memory-list">
+      <li>♡ washroom incident .</li>
+      <li>✦ pink nd brown color.</li>
+      <li>🎀 School memories that seemed ordinary then, but feel special now.</li>
+      <li>☁️ The little moments when we laugh so much that we forget what started it.</li>
+      <li>💌 The thought that some people make even normal days memorable.</li>
+      <li> ya have became a imp part of myh life that never wanted to lose. </li>
+    </ul>
+    <p class="small">P.S. Replace these with your actual inside jokes and memories!</p>
+    <button class="primary" onclick="go('p7');burst(220)">ONE LAST THING ↗</button>
+  </section>
+
+  <!-- PAGE 7: ENDING -->
+  <section class="page" id="p7">
+    <div class="tag">✧ END OF THE LITTLE JOURNEY ✧</div>
+    <div class="icon">🎂</div>
+    <h1>Happy Birthday!</h1>
+    <h2>Stay iconic, Pallavi. ♡</h2>
+    <p>I hope this new chapter brings you happiness, genuine people, peaceful days, unforgettable memories, and all the little things that make life beautiful.</p>
+    <p>Thank you for being part of my story. Here's to more laughter, more memories, and more absolutely unserious conversations.</p>
+    <p>Life keeps moving, school days become memories, and everything changes — but I hope you always find reasons to smile.</p>
+    <p> hope that this bond will last forever.</p> 
+    <h2>YOU DESERVE THE WORLD. ✦</h2>
+    <p class="small">MADE WITH LOBE, JUST FOR YA</p>
+    <button class="secondary" onclick="go('p1')">RESTART THE SURPRISE ↺</button>
+  </section>
+
+  <div class="footer">A LITTLE WEBSITE · A LOT OF LOVE ♥</div>
+</main>
+
+<script>
+const PASSWORD = "1101";
+
+function go(id){
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+document.getElementById("passwordForm").addEventListener("submit",function(e){
+  e.preventDefault();
+  if(document.getElementById("password").value === PASSWORD){
+    document.getElementById("error").textContent = "";
+    go("p2");
+    burst(120);
+  }else{
+    document.getElementById("error").textContent = "Wrong password! Try again ♡";
+    document.getElementById("password").value = "";
+  }
+});
+
+const gifts = {
+  1:{
+    icon:"🎀",title:"A little reminder",
+    text:`Hey Pallavi,
+
+Sometimes I wonder if ya even realise how much you mean to mei. Somewhere between our endless yapping, random gossip, lame jokes and those ordinary school days, ya became someone genuinely special to mei. You’re not just myh best friend; you’re someone who has become a beautiful part of myh everyday life.
+
+I might not always express myh feelings properly, nd I might tease you more than I appreciate ya, but please know that I’m genuinely grateful for you. If I could keep a few moments from myh life forever, so many of them would have ya in them.
+
+I know life changes, people grow, nd nothing stays exactly the same forever. But I hope that years from now, when we look back at these days, we’ll smile at all the memories we made together.
+
+Thank you for being a part of myh story. You’ll always have a special place in my heart, myh shwaty.
+
+**Happy Birthday, myh favourite yap partner,myh 11:11 wish I love you more than myh words could ever explain.**
+
+With all myh love,  
+Your bestie, always. ♡`
+  },
+  2:{
+    icon:"💌",title:"Things I don't say enough",
+    text:`Pallavi,
+
+If someone asked mei to describe our friendship, I don't think I could do it in just a few words. How could I explain our endless yapping, our random gossip sessions, our lame jokes, nd those moments when we laughed at things nobody else would understand?
+
+Some of myh favourite memories aren't even big events. They're the little moments—talking about absolutely everything, sharing random thoughts, making fun of the most unnecessary things, nd turning an ordinary school day into something worth remembering.
+
+One day, we'll leave these classrooms behind. We won't have the same everyday conversations or the same silly reasons to laugh. We'll get busy with our own lives, and school will become a chapter we look back on.
+
+But whenever that happens, I hope you remember us. Remember the laughs, the chaos, the secrets, the gossip, and all the tiny moments that made our friendship ours.
+
+Thank you for being a part of my school story. If I could relive some of these days, I'd want ya there again.
+
+Happy Birthday, Pallavi. One day, these ordinary moments will be our favourite memories.
+
+With love,
+Your yap partner, always. ♡`
+  },
+  3:{
+    icon:"🗝️",title:"Your secret birthday wish",
+    text:`Okay, listen, birthday girl.
+
+Honestly, our friendship deserves its own comedy show because WHAT EVEN ARE WE? The amount of nonsense we talk about, the random gossip sessions, our dramatic reactions to the smallest things, nd the way one tiny topic somehow turns into a whole investigation. At this point, ya deserve detective certificates for your stalking skills.
+
+I swear, if someone secretly recorded our conversations, we'd either become famous or get sent for counselling. There's literally no in-between.
+
+And the funniest part? We can be talking about something serious one second and laughing at the dumbest thing imaginable the next. Our brains genuinely need software updates.
+
+But honestly, I wouldn't trade our chaos for anything. These stupid little moments are the ones I'll probably remember the most when school is over.
+
+So please never become a boring, sensible person. Who am I supposed to yap with then? The walls?
+
+Happy Birthday, myh crime patner. Stay crazy, stay iconic, stay mine , and keep collecting embarrassing memories with mei.
+
+Lobe ya
+
+— Your permanently unserious bestie ♡`
+  }
+};
+
+function openGift(n){
+  document.getElementById("giftIcon").textContent=gifts[n].icon;
+  document.getElementById("giftHeading").textContent=gifts[n].title;
+  document.getElementById("giftLetter").textContent=gifts[n].text;
+  go("pGift");
+  burst(75);
+}
+
+const letters = {
+  1:{
+    icon:"☁️",title:"Open when you are sad",
+    text:`Hey you,
+
+. I wish I could make every sad moment disappear, but since I can't, let this little note remind ya that ya don't have to be okay all the time.
+ It's okay to cry, to feel lost, and to take a break from everything. Please don't be too hard on yourself, okay? You're so much more than your bad days, nd 
+ya deserve the same love ya give to others. And whenever life feels a little too heavy, remember all the stupid things we've laughed about and all the memories 
+we still have to make. I'm always rooting for you, birthday girl. You don't have to face every difficult day pretending to be strong. Take your time, breathe, nd 
+remember that brighter days can come. ilysmm, ya little idiot. Now dry those imaginary tears; we still have so much gossip left to discuss. ♡`
+  },
+  2:{
+    icon:"🪞",title:"Open when you doubt yourself",
+    text:`hey Pallavi,
+
+. If you're reading this, I hope ya know that one bad day, one mistake, or one person's opinion doesn't define who ya are. Please don't be so hard on 
+yourself, ohk? Ya have so many beautiful qualities that ya might not even notice in yourself. Ya don't have to be perfect to be enough, and ya don't have to 
+prove your worth to anyone. I hope you see yourself with the same kindness that ya show the people ya lobe. And whenever ya forget how capable you are, remember
+ that I'm always rooting for you. You've got so many chapters left to live, so many dreams to chase, and so many memories waiting to happen. Believe in yourself a 
+little more, because I'm already proud of you. Lobe ya , idiot. Now stop doubting my bestie, please. ♡`
+  },
+  3:{
+    icon:"🎒",title:"Open when you miss our school days",
+    text:`Remember when the most random thing could become the funniest part of the entire day?
+
+ The endless yapping, random gossip, silly jokes, laughing at the most unserious things, and those ordinary days that
+ somehow became our favourite memories. I wish we could pause time and live some of those moments all over again. One day, we'll look back at these days and realise
+ how much we had to laugh about, even when we thought it was just another normal day. Maybe we'll go to different places, meet different people, and get busy with our
+ own lives, but I hope we never forget the little world we created together. And if you ever miss those days too much, just remember—we didn't make all those memories
+ for nothing. They're ours forever. I lobe ya, my favourite yap partner. Now imagine us sitting in class, gossiping instead of paying attention. Some things will
+ literally never change. ♡`
+  },
+  4:{
+    icon:"💌",title:"Open when you miss me",
+    text:`First of all, wow. Missing me already? Understandable.
+
+ huh? I knew you couldn't survive without your favourite yap partner. But seriously, even when we're not together, I hope ya know that you're
+ always a special part of my life. Think about all our stupid jokes, endless gossip, random conversations, and those moments when we laughed at absolutely nothing.
+ If I could, I'd teleport right next to you and start yapping about the most random thing ever. Until then, just remember that distance or busy days can't erase the 
+memories we've made. And whenever you miss me, just know there's someone out there who is probably thinking about you too. I hope we stay the kind of friends who can 
+meet after ages and still talk like we never spent a day apart. Lobe ya , idiot. Now stop missing me and come back, I've got tea to spill ♡`
+  }
+};
+
+function openWhen(n){
+  document.getElementById("whenIcon").textContent=letters[n].icon;
+  document.getElementById("whenHeading").textContent=letters[n].title;
+  document.getElementById("whenLetter").textContent=letters[n].text;
+  go("pWhen");
+}
+
+/* Confetti animation */
+const canvas=document.getElementById("confetti");
+const ctx=canvas.getContext("2d");
+const reduced=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+let bits=[],raf=null,w=0,h=0;
+
+function resize(){
+  const dpr=Math.min(window.devicePixelRatio||1,2);
+  w=innerWidth;h=innerHeight;
+  canvas.width=w*dpr;canvas.height=h*dpr;
+  canvas.style.width=w+"px";canvas.style.height=h+"px";
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+}
+window.addEventListener("resize",resize);resize();
+
+const colors=["#ff6689","#d9dcec","#c9baff","#ffffff","#ffb6c9","#a5e8dc"];
+function burst(amount=140){
+  if(reduced)return;
+  for(let i=0;i<amount;i++){
+    const a=Math.random()*Math.PI*2;
+    const s=2+Math.random()*8;
+    bits.push({
+      x:w/2,y:h*.35,vx:Math.cos(a)*s,vy:Math.sin(a)*s-2,
+      g:.1+Math.random()*.1,size:3+Math.random()*6,
+      rot:Math.random()*6,spin:(Math.random()-.5)*.2,
+      color:colors[Math.floor(Math.random()*colors.length)],
+      life:90+Math.random()*70
+    });
+  }
+  if(!raf)draw();
+}
+function draw(){
+  ctx.clearRect(0,0,w,h);
+  bits=bits.filter(b=>b.life>0&&b.y<h+20);
+  for(const b of bits){
+    b.x+=b.vx;b.y+=b.vy;b.vy+=b.g;b.vx*=.994;
+    b.rot+=b.spin;b.life--;
+    ctx.save();ctx.translate(b.x,b.y);ctx.rotate(b.rot);
+    ctx.globalAlpha=Math.min(1,b.life/25);ctx.fillStyle=b.color;
+    ctx.fillRect(-b.size/2,-b.size/2,b.size,b.size*.7);
+    ctx.restore();
+  }
+  if(bits.length)raf=requestAnimationFrame(draw);
+  else{ctx.clearRect(0,0,w,h);raf=null;}
+}
+window.addEventListener("load",()=>setTimeout(()=>burst(70),300),{once:true});
+</script>
+</body>
+</html>
